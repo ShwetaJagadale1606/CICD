@@ -19,7 +19,7 @@ jobs:
           ./test
 
       - name: Uploading Artifact of Addition
-        uses: actions/uploding@v4
+        uses: actions/upload-artifact@v4
         with:
           name: addition_binary
           path: test
@@ -30,7 +30,7 @@ jobs:
 
     steps:
       - name: Downloading artifact
-        uses: actions/downloading@V4
+        uses: actions/download-artifact@v4
         with:
           name: addition_binary
           path: .
@@ -55,7 +55,7 @@ jobs:
           ./test_sub
 
       - name: Uploading Binary
-        uses: actions/uploading@V4
+        uses: actions/upload-artifact@v4
         with: 
           name: subtraction_binary
           path: test_sub
@@ -66,7 +66,7 @@ jobs:
 
     steps:
       - name: Downloading Binary
-        uses: actions/download@V4
+        uses: actions/download-artifact@v4
         with:
           name: subtraction_binary
           path: .
@@ -76,7 +76,7 @@ jobs:
 
       - name: Run subtraction Tests
         run: ./test_sub
-        
+
 
 
 
