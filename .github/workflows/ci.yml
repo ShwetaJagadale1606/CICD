@@ -13,7 +13,7 @@ jobs:
       - uses: actions/checkout@v4
       - name: Build and Test Addition
         run: |
-          g++ Addition/addition.cpp test.cpp -o test
+          g++ Addition/addition.cpp Addition/test.cpp -o test
           ./test
 
 
@@ -25,5 +25,5 @@ jobs:
       - uses: action/checkout@v4
       - name: Build and test Subtraction
         run: |
-          g++ Subtraction/sub_fun.cpp test_subtraction.cpp -o test_sub
+          g++ Subtraction/sub_fun.cpp Subtraction/test_subtraction.cpp -o test_sub
           ./test_sub
