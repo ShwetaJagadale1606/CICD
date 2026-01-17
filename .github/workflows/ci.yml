@@ -22,7 +22,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: action/checkout@v4
+      - uses: actions/checkout@v4
       - name: Build and test Subtraction
         run: |
           g++ Subtraction/sub_fun.cpp Subtraction/test_subtraction.cpp -o test_sub
