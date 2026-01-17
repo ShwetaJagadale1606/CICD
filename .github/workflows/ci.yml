@@ -15,7 +15,7 @@ jobs:
 
       - name: Build Addition
         run: |
-          g++ Wall Werror Addtion/addition.cpp Addition/test.cpp -o test
+          g++ -Wall -Werror Addition/addition.cpp Addition/test.cpp -o test
           ./test
 
       - name: Uploading Artifact of Addition
@@ -51,7 +51,7 @@ jobs:
 
       - name: Build Subtraction
         run: |
-          g++ Wall Werror Subtraction/subfun.cpp Subtraction/test_subtraction.cpp -o test_sub
+          g++ -Wall -Werror Subtraction/subfun.cpp Subtraction/test_subtraction.cpp -o test_sub
           ./test_sub
 
       - name: Uploading Binary
