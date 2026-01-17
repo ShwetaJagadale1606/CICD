@@ -6,24 +6,78 @@ on:
   pull_request:
 
 jobs:
-  Addition:
+  build_Addition:
     runs-on: ubuntu-latest
     
     steps:
-      - uses: actions/checkout@v4
-      - name: Build and Test Addition
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Build Addition
         run: |
-          g++ Addition/addition.cpp Addition/test.cpp -o test
+          g++ Wall Werror Addtion/addition.cpp Addition/test.cpp -o test
           ./test
 
+      - name: Uploading Artifact of Addition
+        uses: actions/uploding@v4
+        with:
+          name: addition_binary
+          path: test
+
+  test_addition:
+    runs-on: ubuntu-latest
+    needs: build_Addition
+
+    steps:
+      - name: Downloading artifact
+        uses: actions/downloading@V4
+        with:
+          name: addition_binary
+          path: .
 
 
-  Subtraction:
+      - name: Give execute Command
+        run: chmod +x test
+
+      - name: Run Addition Tests
+        run: ./test
+
+  build_subtraction:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
-      - name: Build and test Subtraction
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Build Subtraction
         run: |
-          g++ Subtraction/subfun.cpp Subtraction/test_subtraction.cpp -o test_sub
+          g++ Wall Werror Subtraction/subfun.cpp Subtraction/test_subtraction.cpp -o test_sub
           ./test_sub
+
+      - name: Uploading Binary
+        uses: actions/uploading@V4
+        with: 
+          name: subtraction_binary
+          path: test_sub
+
+  test_substraction:
+    runs-on: ubuntu-latest
+    needs: build_subtraction
+
+    steps:
+      - name: Downloading Binary
+        uses: actions/download@V4
+        with:
+          name: subtraction_binary
+          path: .
+
+      - name: Give execute command
+        run: chmod +x test_sub
+
+      - name: Run subtraction Tests
+        run: ./test_sub
+        
+
+
+
+
