@@ -1,26 +1,29 @@
-name: C CI Pipeline
+name : Multi-Feature CI Pipeline
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   pull_request:
 
 jobs:
-  build-test:
+  Addition:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build and Test Addition
+        run: |
+          g++ Addition/ addition.cpp test.cpp -o test
+          ./test
+
+
+
+  Subtraction:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Compile
-        run: g++ -Wall -Werror addition.cpp test.cpp -o test
-
-      - name: Run Tests
-        run: ./test
-
-      - name: Upload binary
-        uses: actions/upload-artifact@v4
-        with:
-            name: test-binary
-            path: test
+      - uses: action/checkout@v4
+      - name: Build and test Subtraction
+        run: |
+          g++ Subtraction/sub_fun.cpp test_subtraction.cpp -o test_sub
+          ./test_sub
