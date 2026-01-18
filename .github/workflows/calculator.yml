@@ -1,0 +1,54 @@
+name : Calculator CI Pipeline
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+
+jobs:
+  Build:
+    runs-on: ${{matrix.os}}
+
+    strategy:
+      matrix: 
+        os: [ubuntu-latest, macos-latest]
+
+    steps:
+        - name: Code Checkout
+          uses: actions/chechout@v4
+
+
+        - name: Compile
+          run: |
+            g++ -Wall -Werror Calculator/calculator.cpp Calculator/test_calculator.cpp -o test
+            ./test
+
+        - name: Upload Artifact
+          uses: actions/upload-artifact@v4
+          with:
+            name: calculator_binary
+            path: test
+
+  Test:
+    runs-on: ${{matrix.os}}
+    needs: Build
+
+    strategy:
+        matrix:
+          os: [ubuntu-latest, macos-latest]
+
+
+    steps:
+        - name: Downloading Artifact
+          uses: actions/download-artifact@v4
+          with:
+            name: calculator_binary
+            path: .
+
+
+        - name: Give execute Command
+          run: chmod +x test
+
+        - name: Run Calculator Testcases
+          run: ./test
+
