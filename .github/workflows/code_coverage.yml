@@ -28,7 +28,7 @@ jobs:
 
             - name: Capture coverage data
               run: |
-                lcov --gcov-tool gcov --capture --directory . --output-file coverage.info
+                lcov --capture --directory . --output-file coverage.info --ignore-errors mismatch
 
             - name: Generate HTML report
               run: genhtml coverage.info --output-directory coverage
