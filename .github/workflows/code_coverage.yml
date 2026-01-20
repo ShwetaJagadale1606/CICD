@@ -21,7 +21,7 @@ jobs:
 
             - name: Compile with coverage file
               run: |
-                g++ --coverage Calculator/calculator.cpp Calculator/test_calculator -o test
+                g++ --coverage Calculator/calculator.cpp Calculator/test_calculator.cpp -o test
             
             - name: Run Code
               run: ./test
